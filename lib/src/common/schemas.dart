@@ -354,6 +354,9 @@ class CalendarListEntry {
   /** Geographic location of the calendar as free-form text. Optional. Read-only. */
   String location;
 
+  /** Whether the calendar is the primary calendar of the authenticated user. Read-only. Optional. The default is False. */
+  bool primary;
+
   /** Whether the calendar content shows up in the calendar UI. Optional. The default is False. */
   bool selected;
 
@@ -403,6 +406,9 @@ class CalendarListEntry {
     }
     if (json.containsKey("location")) {
       location = json["location"];
+    }
+    if (json.containsKey("primary")) {
+      primary = json["primary"];
     }
     if (json.containsKey("selected")) {
       selected = json["selected"];
@@ -457,6 +463,9 @@ class CalendarListEntry {
     }
     if (location != null) {
       output["location"] = location;
+    }
+    if (primary != null) {
+      output["primary"] = primary;
     }
     if (selected != null) {
       output["selected"] = selected;
@@ -726,7 +735,7 @@ class Event {
   /** For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. Immutable. */
   EventDateTime originalStartTime;
 
-  /** Whether this is a private event copy where changes are not shared with other copies on other calendars. Optional. Immutable. */
+  /** Whether this is a private event copy where changes are not shared with other copies on other calendars. Optional. Immutable. The default is False. */
   bool privateCopy;
 
   /** List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event. This field is omitted for single events or instances of recurring events. */
