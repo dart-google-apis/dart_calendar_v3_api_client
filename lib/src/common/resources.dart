@@ -14,13 +14,13 @@ class AclResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> delete(String calendarId, String ruleId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> delete(core.String calendarId, core.String ruleId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (ruleId == null) paramErrors.add("ruleId is required");
@@ -55,13 +55,13 @@ class AclResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<AclRule> get(String calendarId, String ruleId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<AclRule> get(core.String calendarId, core.String ruleId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (ruleId == null) paramErrors.add("ruleId is required");
@@ -96,13 +96,13 @@ class AclResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<AclRule> insert(AclRule request, String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<AclRule> insert(AclRule request, core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -133,13 +133,13 @@ class AclResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Acl> list(String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Acl> list(core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -174,13 +174,13 @@ class AclResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<AclRule> patch(AclRule request, String calendarId, String ruleId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<AclRule> patch(AclRule request, core.String calendarId, core.String ruleId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (ruleId == null) paramErrors.add("ruleId is required");
@@ -217,13 +217,13 @@ class AclResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<AclRule> update(AclRule request, String calendarId, String ruleId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<AclRule> update(AclRule request, core.String calendarId, core.String ruleId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (ruleId == null) paramErrors.add("ruleId is required");
@@ -262,13 +262,13 @@ class CalendarListResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> delete(String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> delete(core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -299,13 +299,13 @@ class CalendarListResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<CalendarListEntry> get(String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<CalendarListEntry> get(core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -338,13 +338,13 @@ class CalendarListResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<CalendarListEntry> insert(CalendarListEntry request, {bool colorRgbFormat, Map optParams}) {
-    var completer = new Completer();
+  async.Future<CalendarListEntry> insert(CalendarListEntry request, {core.bool colorRgbFormat, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/calendarList";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (colorRgbFormat != null) queryParams["colorRgbFormat"] = colorRgbFormat;
     if (optParams != null) {
       optParams.forEach((key, value) {
@@ -386,13 +386,13 @@ class CalendarListResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<CalendarList> list({int maxResults, String minAccessRole, String pageToken, bool showHidden, Map optParams}) {
-    var completer = new Completer();
+  async.Future<CalendarList> list({core.int maxResults, core.String minAccessRole, core.String pageToken, core.bool showHidden, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/calendarList";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (maxResults != null) queryParams["maxResults"] = maxResults;
     if (minAccessRole != null && !["freeBusyReader", "owner", "reader", "writer"].contains(minAccessRole)) {
       paramErrors.add("Allowed values for minAccessRole: freeBusyReader, owner, reader, writer");
@@ -432,13 +432,13 @@ class CalendarListResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<CalendarListEntry> patch(CalendarListEntry request, String calendarId, {bool colorRgbFormat, Map optParams}) {
-    var completer = new Completer();
+  async.Future<CalendarListEntry> patch(CalendarListEntry request, core.String calendarId, {core.bool colorRgbFormat, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (colorRgbFormat != null) queryParams["colorRgbFormat"] = colorRgbFormat;
@@ -474,13 +474,13 @@ class CalendarListResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<CalendarListEntry> update(CalendarListEntry request, String calendarId, {bool colorRgbFormat, Map optParams}) {
-    var completer = new Completer();
+  async.Future<CalendarListEntry> update(CalendarListEntry request, core.String calendarId, {core.bool colorRgbFormat, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (colorRgbFormat != null) queryParams["colorRgbFormat"] = colorRgbFormat;
@@ -518,13 +518,13 @@ class CalendarsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> clear(String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> clear(core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/clear";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -555,13 +555,13 @@ class CalendarsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> delete(String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> delete(core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -592,13 +592,13 @@ class CalendarsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Calendar> get(String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Calendar> get(core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -629,13 +629,13 @@ class CalendarsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Calendar> insert(Calendar request, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Calendar> insert(Calendar request, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -666,13 +666,13 @@ class CalendarsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Calendar> patch(Calendar request, String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Calendar> patch(Calendar request, core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -705,13 +705,13 @@ class CalendarsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Calendar> update(Calendar request, String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Calendar> update(Calendar request, core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -746,13 +746,13 @@ class ColorsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Colors> get({Map optParams}) {
-    var completer = new Completer();
+  async.Future<Colors> get({core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "colors";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -791,13 +791,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> delete(String calendarId, String eventId, {bool sendNotifications, Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> delete(core.String calendarId, core.String eventId, {core.bool sendNotifications, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (eventId == null) paramErrors.add("eventId is required");
@@ -840,13 +840,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> get(String calendarId, String eventId, {bool alwaysIncludeEmail, int maxAttendees, String timeZone, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> get(core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.String timeZone, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (alwaysIncludeEmail != null) queryParams["alwaysIncludeEmail"] = alwaysIncludeEmail;
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
@@ -884,13 +884,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> import(Event request, String calendarId, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> import(Event request, core.String calendarId, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/import";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (optParams != null) {
@@ -928,13 +928,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> insert(Event request, String calendarId, {int maxAttendees, bool sendNotifications, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> insert(Event request, core.String calendarId, {core.int maxAttendees, core.bool sendNotifications, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (maxAttendees != null) queryParams["maxAttendees"] = maxAttendees;
@@ -989,13 +989,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Events> instances(String calendarId, String eventId, {bool alwaysIncludeEmail, int maxAttendees, int maxResults, String originalStart, String pageToken, bool showDeleted, String timeMax, String timeMin, String timeZone, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Events> instances(core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.int maxResults, core.String originalStart, core.String pageToken, core.bool showDeleted, core.String timeMax, core.String timeMin, core.String timeZone, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}/instances";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (alwaysIncludeEmail != null) queryParams["alwaysIncludeEmail"] = alwaysIncludeEmail;
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
@@ -1070,13 +1070,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Events> list(String calendarId, {bool alwaysIncludeEmail, String iCalUID, int maxAttendees, int maxResults, String orderBy, String pageToken, String q, bool showDeleted, bool showHiddenInvitations, bool singleEvents, String timeMax, String timeMin, String timeZone, String updatedMin, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Events> list(core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.String q, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (alwaysIncludeEmail != null) queryParams["alwaysIncludeEmail"] = alwaysIncludeEmail;
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
@@ -1130,13 +1130,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> move(String calendarId, String eventId, String destination, {bool sendNotifications, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> move(core.String calendarId, core.String eventId, core.String destination, {core.bool sendNotifications, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}/move";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (destination == null) paramErrors.add("destination is required");
@@ -1183,13 +1183,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> patch(Event request, String calendarId, String eventId, {bool alwaysIncludeEmail, int maxAttendees, bool sendNotifications, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> patch(Event request, core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.bool sendNotifications, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (alwaysIncludeEmail != null) queryParams["alwaysIncludeEmail"] = alwaysIncludeEmail;
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
@@ -1229,13 +1229,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> quickAdd(String calendarId, String text, {bool sendNotifications, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> quickAdd(core.String calendarId, core.String text, {core.bool sendNotifications, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/quickAdd";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
     if (sendNotifications != null) queryParams["sendNotifications"] = sendNotifications;
@@ -1280,13 +1280,13 @@ class EventsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Event> update(Event request, String calendarId, String eventId, {bool alwaysIncludeEmail, int maxAttendees, bool sendNotifications, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Event> update(Event request, core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.bool sendNotifications, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (alwaysIncludeEmail != null) queryParams["alwaysIncludeEmail"] = alwaysIncludeEmail;
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
@@ -1328,13 +1328,13 @@ class FreebusyResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<FreeBusyResponse> query(FreeBusyRequest request, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<FreeBusyResponse> query(FreeBusyRequest request, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "freeBusy";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -1369,13 +1369,13 @@ class SettingsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Setting> get(String setting, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Setting> get(core.String setting, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/settings/{setting}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (setting == null) paramErrors.add("setting is required");
     if (setting != null) urlParams["setting"] = setting;
     if (optParams != null) {
@@ -1404,13 +1404,13 @@ class SettingsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Settings> list({Map optParams}) {
-    var completer = new Completer();
+  async.Future<Settings> list({core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "users/me/settings";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -1428,6 +1428,46 @@ class SettingsResource extends Resource {
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
     response
       .then((data) => completer.complete(new Settings.fromJson(data)))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+}
+
+class SubscriptionsResource extends Resource {
+
+  SubscriptionsResource(Client client) : super(client) {
+  }
+
+  /**
+   *
+   * [request] - Subscription to send in this request
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> unsubscribe(Subscription request, {core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "subscriptions/unsubscribe";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(data))
       .catchError((e) { completer.completeError(e); return true; });
     return completer.future;
   }
