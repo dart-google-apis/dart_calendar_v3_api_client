@@ -4,22 +4,22 @@ part of calendar_v3_api_console;
 /** Lets you manipulate events and other calendar data. */
 class Calendar extends ConsoleClient {
 
-  AclResource _acl;
-  AclResource get acl => _acl;
-  CalendarListResource _calendarList;
-  CalendarListResource get calendarList => _calendarList;
-  CalendarsResource _calendars;
-  CalendarsResource get calendars => _calendars;
-  ColorsResource _colors;
-  ColorsResource get colors => _colors;
-  EventsResource _events;
-  EventsResource get events => _events;
-  FreebusyResource _freebusy;
-  FreebusyResource get freebusy => _freebusy;
-  SettingsResource _settings;
-  SettingsResource get settings => _settings;
-  SubscriptionsResource _subscriptions;
-  SubscriptionsResource get subscriptions => _subscriptions;
+  AclResource_ _acl;
+  AclResource_ get acl => _acl;
+  CalendarListResource_ _calendarList;
+  CalendarListResource_ get calendarList => _calendarList;
+  CalendarsResource_ _calendars;
+  CalendarsResource_ get calendars => _calendars;
+  ColorsResource_ _colors;
+  ColorsResource_ get colors => _colors;
+  EventsResource_ _events;
+  EventsResource_ get events => _events;
+  FreebusyResource_ _freebusy;
+  FreebusyResource_ get freebusy => _freebusy;
+  SettingsResource_ _settings;
+  SettingsResource_ get settings => _settings;
+  SubscriptionsResource_ _subscriptions;
+  SubscriptionsResource_ get subscriptions => _subscriptions;
 
   /** OAuth Scope2: Manage your calendars */
   static const core.String CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar";
@@ -79,13 +79,13 @@ class Calendar extends ConsoleClient {
   Calendar([oauth2.OAuth2Console auth]) : super(auth) {
     basePath = "/calendar/v3/";
     rootUrl = "https://www.googleapis.com:443/";
-    _acl = new AclResource(this);
-    _calendarList = new CalendarListResource(this);
-    _calendars = new CalendarsResource(this);
-    _colors = new ColorsResource(this);
-    _events = new EventsResource(this);
-    _freebusy = new FreebusyResource(this);
-    _settings = new SettingsResource(this);
-    _subscriptions = new SubscriptionsResource(this);
+    _acl = new AclResource_(this);
+    _calendarList = new CalendarListResource_(this);
+    _calendars = new CalendarsResource_(this);
+    _colors = new ColorsResource_(this);
+    _events = new EventsResource_(this);
+    _freebusy = new FreebusyResource_(this);
+    _settings = new SettingsResource_(this);
+    _subscriptions = new SubscriptionsResource_(this);
   }
 }
