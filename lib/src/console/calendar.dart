@@ -18,8 +18,6 @@ class Calendar extends ConsoleClient {
   FreebusyResource_ get freebusy => _freebusy;
   SettingsResource_ _settings;
   SettingsResource_ get settings => _settings;
-  SubscriptionsResource_ _subscriptions;
-  SubscriptionsResource_ get subscriptions => _subscriptions;
 
   /** OAuth Scope2: Manage your calendars */
   static const core.String CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar";
@@ -78,7 +76,7 @@ class Calendar extends ConsoleClient {
 
   Calendar([oauth2.OAuth2Console auth]) : super(auth) {
     basePath = "/calendar/v3/";
-    rootUrl = "https://www.googleapis.com:443/";
+    rootUrl = "https://www.googleapis.com/";
     _acl = new AclResource_(this);
     _calendarList = new CalendarListResource_(this);
     _calendars = new CalendarsResource_(this);
@@ -86,6 +84,5 @@ class Calendar extends ConsoleClient {
     _events = new EventsResource_(this);
     _freebusy = new FreebusyResource_(this);
     _settings = new SettingsResource_(this);
-    _subscriptions = new SubscriptionsResource_(this);
   }
 }
