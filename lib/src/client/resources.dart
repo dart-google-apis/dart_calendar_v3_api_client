@@ -15,7 +15,6 @@ class AclResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<core.Map> delete(core.String calendarId, core.String ruleId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -34,16 +33,12 @@ class AclResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(data))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response;
   }
 
   /**
@@ -56,7 +51,6 @@ class AclResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<AclRule> get(core.String calendarId, core.String ruleId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -75,16 +69,13 @@ class AclResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new AclRule.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new AclRule.fromJson(data));
   }
 
   /**
@@ -97,7 +88,6 @@ class AclResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<AclRule> insert(AclRule request, core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -114,16 +104,13 @@ class AclResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new AclRule.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new AclRule.fromJson(data));
   }
 
   /**
@@ -134,7 +121,6 @@ class AclResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Acl> list(core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -151,16 +137,13 @@ class AclResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Acl.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Acl.fromJson(data));
   }
 
   /**
@@ -175,7 +158,6 @@ class AclResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<AclRule> patch(AclRule request, core.String calendarId, core.String ruleId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -194,16 +176,13 @@ class AclResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new AclRule.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new AclRule.fromJson(data));
   }
 
   /**
@@ -218,7 +197,6 @@ class AclResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<AclRule> update(AclRule request, core.String calendarId, core.String ruleId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/acl/{ruleId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -237,16 +215,13 @@ class AclResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new AclRule.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new AclRule.fromJson(data));
   }
 }
 
@@ -263,7 +238,6 @@ class CalendarListResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<core.Map> delete(core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -280,16 +254,12 @@ class CalendarListResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(data))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response;
   }
 
   /**
@@ -300,7 +270,6 @@ class CalendarListResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<CalendarListEntry> get(core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -317,16 +286,13 @@ class CalendarListResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new CalendarListEntry.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new CalendarListEntry.fromJson(data));
   }
 
   /**
@@ -339,7 +305,6 @@ class CalendarListResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<CalendarListEntry> insert(CalendarListEntry request, {core.bool colorRgbFormat, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/calendarList";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -355,16 +320,13 @@ class CalendarListResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new CalendarListEntry.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new CalendarListEntry.fromJson(data));
   }
 
   /**
@@ -387,7 +349,6 @@ class CalendarListResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<CalendarList> list({core.int maxResults, core.String minAccessRole, core.String pageToken, core.bool showHidden, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/calendarList";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -409,16 +370,13 @@ class CalendarListResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new CalendarList.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new CalendarList.fromJson(data));
   }
 
   /**
@@ -433,7 +391,6 @@ class CalendarListResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<CalendarListEntry> patch(CalendarListEntry request, core.String calendarId, {core.bool colorRgbFormat, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -451,16 +408,13 @@ class CalendarListResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new CalendarListEntry.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new CalendarListEntry.fromJson(data));
   }
 
   /**
@@ -475,7 +429,6 @@ class CalendarListResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<CalendarListEntry> update(CalendarListEntry request, core.String calendarId, {core.bool colorRgbFormat, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/calendarList/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -493,16 +446,13 @@ class CalendarListResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new CalendarListEntry.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new CalendarListEntry.fromJson(data));
   }
 }
 
@@ -519,7 +469,6 @@ class CalendarsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<core.Map> clear(core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/clear";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -536,16 +485,12 @@ class CalendarsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(data))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response;
   }
 
   /**
@@ -556,7 +501,6 @@ class CalendarsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<core.Map> delete(core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -573,16 +517,12 @@ class CalendarsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(data))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response;
   }
 
   /**
@@ -593,7 +533,6 @@ class CalendarsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Calendar> get(core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -610,16 +549,13 @@ class CalendarsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Calendar.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Calendar.fromJson(data));
   }
 
   /**
@@ -630,7 +566,6 @@ class CalendarsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Calendar> insert(Calendar request, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -645,16 +580,13 @@ class CalendarsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Calendar.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Calendar.fromJson(data));
   }
 
   /**
@@ -667,7 +599,6 @@ class CalendarsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Calendar> patch(Calendar request, core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -684,16 +615,13 @@ class CalendarsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Calendar.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Calendar.fromJson(data));
   }
 
   /**
@@ -706,7 +634,6 @@ class CalendarsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Calendar> update(Calendar request, core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -723,16 +650,13 @@ class CalendarsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Calendar.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Calendar.fromJson(data));
   }
 }
 
@@ -747,7 +671,6 @@ class ColorsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Colors> get({core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "colors";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -762,16 +685,13 @@ class ColorsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Colors.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Colors.fromJson(data));
   }
 }
 
@@ -792,7 +712,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<core.Map> delete(core.String calendarId, core.String eventId, {core.bool sendNotifications, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -812,16 +731,12 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(data))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response;
   }
 
   /**
@@ -841,7 +756,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> get(core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.String timeZone, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -863,16 +777,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 
   /**
@@ -885,7 +796,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> import(Event request, core.String calendarId, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/import";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -902,16 +812,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 
   /**
@@ -929,7 +836,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> insert(Event request, core.String calendarId, {core.int maxAttendees, core.bool sendNotifications, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -948,16 +854,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 
   /**
@@ -990,7 +893,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Events> instances(core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.int maxResults, core.String originalStart, core.String pageToken, core.bool showDeleted, core.String timeMax, core.String timeMin, core.String timeZone, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}/instances";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1018,16 +920,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Events.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Events.fromJson(data));
   }
 
   /**
@@ -1071,7 +970,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Events> list(core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.String q, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1105,16 +1003,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Events.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Events.fromJson(data));
   }
 
   /**
@@ -1131,7 +1026,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> move(core.String calendarId, core.String eventId, core.String destination, {core.bool sendNotifications, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}/move";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1153,16 +1047,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 
   /**
@@ -1184,7 +1075,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> patch(Event request, core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.bool sendNotifications, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1206,16 +1096,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 
   /**
@@ -1230,7 +1117,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> quickAdd(core.String calendarId, core.String text, {core.bool sendNotifications, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/quickAdd";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1250,16 +1136,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 
   /**
@@ -1281,7 +1164,6 @@ class EventsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Event> update(Event request, core.String calendarId, core.String eventId, {core.bool alwaysIncludeEmail, core.int maxAttendees, core.bool sendNotifications, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "calendars/{calendarId}/events/{eventId}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1303,16 +1185,13 @@ class EventsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Event.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Event.fromJson(data));
   }
 }
 
@@ -1329,7 +1208,6 @@ class FreebusyResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<FreeBusyResponse> query(FreeBusyRequest request, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "freeBusy";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1344,16 +1222,13 @@ class FreebusyResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new FreeBusyResponse.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new FreeBusyResponse.fromJson(data));
   }
 }
 
@@ -1370,7 +1245,6 @@ class SettingsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Setting> get(core.String setting, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/settings/{setting}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1387,16 +1261,13 @@ class SettingsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Setting.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Setting.fromJson(data));
   }
 
   /**
@@ -1405,7 +1276,6 @@ class SettingsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Settings> list({core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "users/me/settings";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1420,16 +1290,13 @@ class SettingsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Settings.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Settings.fromJson(data));
   }
 }
 
