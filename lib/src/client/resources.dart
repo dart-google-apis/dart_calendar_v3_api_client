@@ -1,9 +1,11 @@
-part of calendar_v3_api_client;
+part of calendar_v3_api;
 
-class AclResource_ extends Resource {
+class AclResource_ {
 
-  AclResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AclResource_(Client client) :
+      _client = client;
 
   /**
    * Deletes an access control rule.
@@ -225,10 +227,12 @@ class AclResource_ extends Resource {
   }
 }
 
-class CalendarListResource_ extends Resource {
+class CalendarListResource_ {
 
-  CalendarListResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  CalendarListResource_(Client client) :
+      _client = client;
 
   /**
    * Deletes an entry on the user's calendar list.
@@ -456,10 +460,12 @@ class CalendarListResource_ extends Resource {
   }
 }
 
-class CalendarsResource_ extends Resource {
+class CalendarsResource_ {
 
-  CalendarsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  CalendarsResource_(Client client) :
+      _client = client;
 
   /**
    * Clears a primary calendar. This operation deletes all data associated with the primary calendar of an account and cannot be undone.
@@ -660,10 +666,49 @@ class CalendarsResource_ extends Resource {
   }
 }
 
-class ColorsResource_ extends Resource {
+class ChannelsResource_ {
 
-  ColorsResource_(Client client) : super(client) {
+  final Client _client;
+
+  ChannelsResource_(Client client) :
+      _client = client;
+
+  /**
+   *
+   * [request] - Channel to send in this request
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> stop(Channel request, {core.Map optParams}) {
+    var url = "channels/stop";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response;
   }
+}
+
+class ColorsResource_ {
+
+  final Client _client;
+
+  ColorsResource_(Client client) :
+      _client = client;
 
   /**
    * Returns the color definitions for calendars and events.
@@ -695,10 +740,12 @@ class ColorsResource_ extends Resource {
   }
 }
 
-class EventsResource_ extends Resource {
+class EventsResource_ {
 
-  EventsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  EventsResource_(Client client) :
+      _client = client;
 
   /**
    * Deletes an event.
@@ -787,7 +834,7 @@ class EventsResource_ extends Resource {
   }
 
   /**
-   * Imports an event.
+   * Imports an event. This operation is used to add a private copy of an existing event to a calendar.
    *
    * [request] - Event to send in this request
    *
@@ -1193,12 +1240,99 @@ class EventsResource_ extends Resource {
     return response
       .then((data) => new Event.fromJson(data));
   }
+
+  /**
+   * Subscribe to changes in events collection
+   *
+   * [request] - Channel to send in this request
+   *
+   * [calendarId] - Calendar identifier.
+   *
+   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   *
+   * [iCalUID] - Specifies iCalendar UID (iCalUID) of events to be included in the response. Optional.
+   *
+   * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+   *   Minimum: 1
+   *
+   * [maxResults] - Maximum number of events returned on one result page. Optional.
+   *   Minimum: 1
+   *
+   * [orderBy] - The order of the events returned in the result. Optional. The default is an unspecified, stable order.
+   *   Allowed values:
+   *     startTime - Order by the start date/time (ascending). This is only available when querying single events (i.e. the parameter "singleEvents" is True)
+   *     updated - Order by last modification time (ascending).
+   *
+   * [pageToken] - Token specifying which result page to return. Optional.
+   *
+   * [q] - Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
+   *
+   * [showDeleted] - Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
+   *
+   * [showHiddenInvitations] - Whether to include hidden invitations in the result. Optional. The default is False.
+   *
+   * [singleEvents] - Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
+   *
+   * [timeMax] - Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.
+   *
+   * [timeMin] - Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time.
+   *
+   * [timeZone] - Time zone used in the response. Optional. The default is the time zone of the calendar.
+   *
+   * [updatedMin] - Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by last modification time.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Channel> watch(Channel request, core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.String q, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
+    var url = "calendars/{calendarId}/events/watch";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (alwaysIncludeEmail != null) queryParams["alwaysIncludeEmail"] = alwaysIncludeEmail;
+    if (calendarId == null) paramErrors.add("calendarId is required");
+    if (calendarId != null) urlParams["calendarId"] = calendarId;
+    if (iCalUID != null) queryParams["iCalUID"] = iCalUID;
+    if (maxAttendees != null) queryParams["maxAttendees"] = maxAttendees;
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (orderBy != null && !["startTime", "updated"].contains(orderBy)) {
+      paramErrors.add("Allowed values for orderBy: startTime, updated");
+    }
+    if (orderBy != null) queryParams["orderBy"] = orderBy;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (q != null) queryParams["q"] = q;
+    if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
+    if (showHiddenInvitations != null) queryParams["showHiddenInvitations"] = showHiddenInvitations;
+    if (singleEvents != null) queryParams["singleEvents"] = singleEvents;
+    if (timeMax != null) queryParams["timeMax"] = timeMax;
+    if (timeMin != null) queryParams["timeMin"] = timeMin;
+    if (timeZone != null) queryParams["timeZone"] = timeZone;
+    if (updatedMin != null) queryParams["updatedMin"] = updatedMin;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Channel.fromJson(data));
+  }
 }
 
-class FreebusyResource_ extends Resource {
+class FreebusyResource_ {
 
-  FreebusyResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  FreebusyResource_(Client client) :
+      _client = client;
 
   /**
    * Returns free/busy information for a set of calendars.
@@ -1232,10 +1366,12 @@ class FreebusyResource_ extends Resource {
   }
 }
 
-class SettingsResource_ extends Resource {
+class SettingsResource_ {
 
-  SettingsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  SettingsResource_(Client client) :
+      _client = client;
 
   /**
    * Returns a single user setting.

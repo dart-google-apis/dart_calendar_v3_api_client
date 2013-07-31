@@ -1,4 +1,4 @@
-part of calendar_v3_api_client;
+part of calendar_v3_api;
 
 class Acl {
 
@@ -20,10 +20,7 @@ class Acl {
       etag = json["etag"];
     }
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new AclRule.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new AclRule.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -41,10 +38,7 @@ class Acl {
       output["etag"] = etag;
     }
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -274,10 +268,7 @@ class CalendarList {
       etag = json["etag"];
     }
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new CalendarListEntry.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new CalendarListEntry.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -295,10 +286,7 @@ class CalendarList {
       output["etag"] = etag;
     }
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -381,10 +369,7 @@ class CalendarListEntry {
       colorId = json["colorId"];
     }
     if (json.containsKey("defaultReminders")) {
-      defaultReminders = [];
-      json["defaultReminders"].forEach((item) {
-        defaultReminders.add(new EventReminder.fromJson(item));
-      });
+      defaultReminders = json["defaultReminders"].map((defaultRemindersItem) => new EventReminder.fromJson(defaultRemindersItem)).toList();
     }
     if (json.containsKey("description")) {
       description = json["description"];
@@ -438,10 +423,7 @@ class CalendarListEntry {
       output["colorId"] = colorId;
     }
     if (defaultReminders != null) {
-      output["defaultReminders"] = new core.List();
-      defaultReminders.forEach((item) {
-        output["defaultReminders"].add(item.toJson());
-      });
+      output["defaultReminders"] = defaultReminders.map((defaultRemindersItem) => defaultRemindersItem.toJson()).toList();
     }
     if (description != null) {
       output["description"] = description;
@@ -488,6 +470,106 @@ class CalendarListEntry {
 
 }
 
+class Channel {
+
+  /** The address of the receiving entity where events are delivered. Specific to the channel type. */
+  core.String address;
+
+  /** The expiration instant for this channel if it is defined. */
+  core.int expiration;
+
+  /** A UUID for the channel */
+  core.String id;
+
+  /** A channel watching an API resource */
+  core.String kind;
+
+  /** Additional parameters controlling delivery channel behavior */
+  core.Map<core.String, core.String> params;
+
+  /** An opaque id that identifies the resource that is being watched. Stable across different API versions */
+  core.String resourceId;
+
+  /** The canonicalized ID of the watched resource. */
+  core.String resourceUri;
+
+  /** An arbitrary string associated with the channel that is delivered to the target address with each event delivered over this channel. */
+  core.String token;
+
+  /** The type of delivery mechanism used by this channel */
+  core.String type;
+
+  /** Create new Channel from JSON data */
+  Channel.fromJson(core.Map json) {
+    if (json.containsKey("address")) {
+      address = json["address"];
+    }
+    if (json.containsKey("expiration")) {
+      expiration = (json["expiration"] is core.String) ? core.int.parse(json["expiration"]) : json["expiration"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("params")) {
+      params = _mapMap(json["params"]);
+    }
+    if (json.containsKey("resourceId")) {
+      resourceId = json["resourceId"];
+    }
+    if (json.containsKey("resourceUri")) {
+      resourceUri = json["resourceUri"];
+    }
+    if (json.containsKey("token")) {
+      token = json["token"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for Channel */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (address != null) {
+      output["address"] = address;
+    }
+    if (expiration != null) {
+      output["expiration"] = expiration;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (params != null) {
+      output["params"] = _mapMap(params);
+    }
+    if (resourceId != null) {
+      output["resourceId"] = resourceId;
+    }
+    if (resourceUri != null) {
+      output["resourceUri"] = resourceUri;
+    }
+    if (token != null) {
+      output["token"] = token;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Channel */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
 class ColorDefinition {
 
   /** The background color associated with this color definition. */
@@ -528,10 +610,10 @@ class ColorDefinition {
 class Colors {
 
   /** Palette of calendar colors, mapping from the color ID to its definition. An 'calendarListEntry' resource refers to one of these color IDs in its 'color' field. Read-only. */
-  ColorsCalendar calendar;
+  core.Map<core.String, ColorDefinition> calendar;
 
   /** Palette of event colors, mapping from the color ID to its definition. An 'event' resource may refer to one of these color IDs in its 'color' field. Read-only. */
-  ColorsEvent event;
+  core.Map<core.String, ColorDefinition> event;
 
   /** Type of the resource ("calendar#colors"). */
   core.String kind;
@@ -542,10 +624,10 @@ class Colors {
   /** Create new Colors from JSON data */
   Colors.fromJson(core.Map json) {
     if (json.containsKey("calendar")) {
-      calendar = new ColorsCalendar.fromJson(json["calendar"]);
+      calendar = _mapMap(json["calendar"], (calendarItem) => new ColorDefinition.fromJson(calendarItem));
     }
     if (json.containsKey("event")) {
-      event = new ColorsEvent.fromJson(json["event"]);
+      event = _mapMap(json["event"], (eventItem) => new ColorDefinition.fromJson(eventItem));
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -560,10 +642,10 @@ class Colors {
     var output = new core.Map();
 
     if (calendar != null) {
-      output["calendar"] = calendar.toJson();
+      output["calendar"] = _mapMap(calendar, (calendarItem) => calendarItem.toJson());
     }
     if (event != null) {
-      output["event"] = event.toJson();
+      output["event"] = _mapMap(event, (eventItem) => eventItem.toJson());
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -576,46 +658,6 @@ class Colors {
   }
 
   /** Return String representation of Colors */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Palette of calendar colors, mapping from the color ID to its definition. An 'calendarListEntry' resource refers to one of these color IDs in its 'color' field. Read-only. */
-class ColorsCalendar {
-
-  /** Create new ColorsCalendar from JSON data */
-  ColorsCalendar.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for ColorsCalendar */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of ColorsCalendar */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Palette of event colors, mapping from the color ID to its definition. An 'event' resource may refer to one of these color IDs in its 'color' field. Read-only. */
-class ColorsEvent {
-
-  /** Create new ColorsEvent from JSON data */
-  ColorsEvent.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for ColorsEvent */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of ColorsEvent */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -786,10 +828,7 @@ class Event {
       anyoneCanAddSelf = json["anyoneCanAddSelf"];
     }
     if (json.containsKey("attendees")) {
-      attendees = [];
-      json["attendees"].forEach((item) {
-        attendees.add(new EventAttendee.fromJson(item));
-      });
+      attendees = json["attendees"].map((attendeesItem) => new EventAttendee.fromJson(attendeesItem)).toList();
     }
     if (json.containsKey("attendeesOmitted")) {
       attendeesOmitted = json["attendeesOmitted"];
@@ -861,10 +900,7 @@ class Event {
       privateCopy = json["privateCopy"];
     }
     if (json.containsKey("recurrence")) {
-      recurrence = [];
-      json["recurrence"].forEach((item) {
-        recurrence.add(item);
-      });
+      recurrence = json["recurrence"].toList();
     }
     if (json.containsKey("recurringEventId")) {
       recurringEventId = json["recurringEventId"];
@@ -906,10 +942,7 @@ class Event {
       output["anyoneCanAddSelf"] = anyoneCanAddSelf;
     }
     if (attendees != null) {
-      output["attendees"] = new core.List();
-      attendees.forEach((item) {
-        output["attendees"].add(item.toJson());
-      });
+      output["attendees"] = attendees.map((attendeesItem) => attendeesItem.toJson()).toList();
     }
     if (attendeesOmitted != null) {
       output["attendeesOmitted"] = attendeesOmitted;
@@ -981,10 +1014,7 @@ class Event {
       output["privateCopy"] = privateCopy;
     }
     if (recurrence != null) {
-      output["recurrence"] = new core.List();
-      recurrence.forEach((item) {
-        output["recurrence"].add(item);
-      });
+      output["recurrence"] = recurrence.toList();
     }
     if (recurringEventId != null) {
       output["recurringEventId"] = recurringEventId;
@@ -1021,44 +1051,6 @@ class Event {
   }
 
   /** Return String representation of Event */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Source of an event from which it was created; for example a web page, an email message or any document identifiable by an URL using HTTP/HTTPS protocol. Accessible only by the creator of the event. */
-class EventSource {
-
-  /** Title of the source; for example a title of a web page or an email subject. */
-  core.String title;
-
-  /** URL of the source pointing to a resource. URL's protocol must be HTTP or HTTPS. */
-  core.String url;
-
-  /** Create new EventSource from JSON data */
-  EventSource.fromJson(core.Map json) {
-    if (json.containsKey("title")) {
-      title = json["title"];
-    }
-    if (json.containsKey("url")) {
-      url = json["url"];
-    }
-  }
-
-  /** Create JSON Object for EventSource */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (title != null) {
-      output["title"] = title;
-    }
-    if (url != null) {
-      output["url"] = url;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of EventSource */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -1123,18 +1115,18 @@ class EventCreator {
 class EventExtendedProperties {
 
   /** Properties that are private to the copy of the event that appears on this calendar. */
-  EventExtendedPropertiesPrivate private;
+  core.Map<core.String, core.String> private;
 
   /** Properties that are shared between copies of the event on other attendees' calendars. */
-  EventExtendedPropertiesShared shared;
+  core.Map<core.String, core.String> shared;
 
   /** Create new EventExtendedProperties from JSON data */
   EventExtendedProperties.fromJson(core.Map json) {
     if (json.containsKey("private")) {
-      private = new EventExtendedPropertiesPrivate.fromJson(json["private"]);
+      private = _mapMap(json["private"]);
     }
     if (json.containsKey("shared")) {
-      shared = new EventExtendedPropertiesShared.fromJson(json["shared"]);
+      shared = _mapMap(json["shared"]);
     }
   }
 
@@ -1143,10 +1135,10 @@ class EventExtendedProperties {
     var output = new core.Map();
 
     if (private != null) {
-      output["private"] = private.toJson();
+      output["private"] = _mapMap(private);
     }
     if (shared != null) {
-      output["shared"] = shared.toJson();
+      output["shared"] = _mapMap(shared);
     }
 
     return output;
@@ -1157,86 +1149,96 @@ class EventExtendedProperties {
 
 }
 
-/** Properties that are private to the copy of the event that appears on this calendar. */
-class EventExtendedPropertiesPrivate {
+/** A gadget that extends this event. */
+class EventGadget {
 
-  /** Create new EventExtendedPropertiesPrivate from JSON data */
-  EventExtendedPropertiesPrivate.fromJson(core.Map json) {
+  /** The gadget's display mode. Optional. Possible values are:  
+- "icon" - The gadget displays next to the event's title in the calendar view. 
+- "chip" - The gadget displays when the event is clicked. */
+  core.String display;
+
+  /** The gadget's height in pixels. Optional. */
+  core.int height;
+
+  /** The gadget's icon URL. */
+  core.String iconLink;
+
+  /** The gadget's URL. */
+  core.String link;
+
+  /** Preferences. */
+  core.Map<core.String, core.String> preferences;
+
+  /** The gadget's title. */
+  core.String title;
+
+  /** The gadget's type. */
+  core.String type;
+
+  /** The gadget's width in pixels. Optional. */
+  core.int width;
+
+  /** Create new EventGadget from JSON data */
+  EventGadget.fromJson(core.Map json) {
+    if (json.containsKey("display")) {
+      display = json["display"];
+    }
+    if (json.containsKey("height")) {
+      height = json["height"];
+    }
+    if (json.containsKey("iconLink")) {
+      iconLink = json["iconLink"];
+    }
+    if (json.containsKey("link")) {
+      link = json["link"];
+    }
+    if (json.containsKey("preferences")) {
+      preferences = _mapMap(json["preferences"]);
+    }
+    if (json.containsKey("title")) {
+      title = json["title"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+    if (json.containsKey("width")) {
+      width = json["width"];
+    }
   }
 
-  /** Create JSON Object for EventExtendedPropertiesPrivate */
+  /** Create JSON Object for EventGadget */
   core.Map toJson() {
     var output = new core.Map();
 
+    if (display != null) {
+      output["display"] = display;
+    }
+    if (height != null) {
+      output["height"] = height;
+    }
+    if (iconLink != null) {
+      output["iconLink"] = iconLink;
+    }
+    if (link != null) {
+      output["link"] = link;
+    }
+    if (preferences != null) {
+      output["preferences"] = _mapMap(preferences);
+    }
+    if (title != null) {
+      output["title"] = title;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+    if (width != null) {
+      output["width"] = width;
+    }
 
     return output;
   }
 
-  /** Return String representation of EventExtendedPropertiesPrivate */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Properties that are shared between copies of the event on other attendees' calendars. */
-class EventExtendedPropertiesShared {
-
-  /** Create new EventExtendedPropertiesShared from JSON data */
-  EventExtendedPropertiesShared.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for EventExtendedPropertiesShared */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of EventExtendedPropertiesShared */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Information about the event's reminders for the authenticated user. */
-class EventReminders {
-
-  /** If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. */
-  core.List<EventReminder> overrides;
-
-  /** Whether the default reminders of the calendar apply to the event. */
-  core.bool useDefault;
-
-  /** Create new EventReminders from JSON data */
-  EventReminders.fromJson(core.Map json) {
-    if (json.containsKey("overrides")) {
-      overrides = [];
-      json["overrides"].forEach((item) {
-        overrides.add(new EventReminder.fromJson(item));
-      });
-    }
-    if (json.containsKey("useDefault")) {
-      useDefault = json["useDefault"];
-    }
-  }
-
-  /** Create JSON Object for EventReminders */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (overrides != null) {
-      output["overrides"] = new core.List();
-      overrides.forEach((item) {
-        output["overrides"].add(item.toJson());
-      });
-    }
-    if (useDefault != null) {
-      output["useDefault"] = useDefault;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of EventReminders */
+  /** Return String representation of EventGadget */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -1297,116 +1299,78 @@ class EventOrganizer {
 
 }
 
-/** A gadget that extends this event. */
-class EventGadget {
+/** Information about the event's reminders for the authenticated user. */
+class EventReminders {
 
-  /** The gadget's display mode. Optional. Possible values are:  
-- "icon" - The gadget displays next to the event's title in the calendar view. 
-- "chip" - The gadget displays when the event is clicked. */
-  core.String display;
+  /** If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. */
+  core.List<EventReminder> overrides;
 
-  /** The gadget's height in pixels. Optional. */
-  core.int height;
+  /** Whether the default reminders of the calendar apply to the event. */
+  core.bool useDefault;
 
-  /** The gadget's icon URL. */
-  core.String iconLink;
-
-  /** The gadget's URL. */
-  core.String link;
-
-  /** Preferences. */
-  EventGadgetPreferences preferences;
-
-  /** The gadget's title. */
-  core.String title;
-
-  /** The gadget's type. */
-  core.String type;
-
-  /** The gadget's width in pixels. Optional. */
-  core.int width;
-
-  /** Create new EventGadget from JSON data */
-  EventGadget.fromJson(core.Map json) {
-    if (json.containsKey("display")) {
-      display = json["display"];
+  /** Create new EventReminders from JSON data */
+  EventReminders.fromJson(core.Map json) {
+    if (json.containsKey("overrides")) {
+      overrides = json["overrides"].map((overridesItem) => new EventReminder.fromJson(overridesItem)).toList();
     }
-    if (json.containsKey("height")) {
-      height = json["height"];
-    }
-    if (json.containsKey("iconLink")) {
-      iconLink = json["iconLink"];
-    }
-    if (json.containsKey("link")) {
-      link = json["link"];
-    }
-    if (json.containsKey("preferences")) {
-      preferences = new EventGadgetPreferences.fromJson(json["preferences"]);
-    }
-    if (json.containsKey("title")) {
-      title = json["title"];
-    }
-    if (json.containsKey("type")) {
-      type = json["type"];
-    }
-    if (json.containsKey("width")) {
-      width = json["width"];
+    if (json.containsKey("useDefault")) {
+      useDefault = json["useDefault"];
     }
   }
 
-  /** Create JSON Object for EventGadget */
+  /** Create JSON Object for EventReminders */
   core.Map toJson() {
     var output = new core.Map();
 
-    if (display != null) {
-      output["display"] = display;
+    if (overrides != null) {
+      output["overrides"] = overrides.map((overridesItem) => overridesItem.toJson()).toList();
     }
-    if (height != null) {
-      output["height"] = height;
-    }
-    if (iconLink != null) {
-      output["iconLink"] = iconLink;
-    }
-    if (link != null) {
-      output["link"] = link;
-    }
-    if (preferences != null) {
-      output["preferences"] = preferences.toJson();
-    }
-    if (title != null) {
-      output["title"] = title;
-    }
-    if (type != null) {
-      output["type"] = type;
-    }
-    if (width != null) {
-      output["width"] = width;
+    if (useDefault != null) {
+      output["useDefault"] = useDefault;
     }
 
     return output;
   }
 
-  /** Return String representation of EventGadget */
+  /** Return String representation of EventReminders */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
 
-/** Preferences. */
-class EventGadgetPreferences {
+/** Source of an event from which it was created; for example a web page, an email message or any document identifiable by an URL using HTTP/HTTPS protocol. Accessible only by the creator of the event. */
+class EventSource {
 
-  /** Create new EventGadgetPreferences from JSON data */
-  EventGadgetPreferences.fromJson(core.Map json) {
+  /** Title of the source; for example a title of a web page or an email subject. */
+  core.String title;
+
+  /** URL of the source pointing to a resource. URL's protocol must be HTTP or HTTPS. */
+  core.String url;
+
+  /** Create new EventSource from JSON data */
+  EventSource.fromJson(core.Map json) {
+    if (json.containsKey("title")) {
+      title = json["title"];
+    }
+    if (json.containsKey("url")) {
+      url = json["url"];
+    }
   }
 
-  /** Create JSON Object for EventGadgetPreferences */
+  /** Create JSON Object for EventSource */
   core.Map toJson() {
     var output = new core.Map();
 
+    if (title != null) {
+      output["title"] = title;
+    }
+    if (url != null) {
+      output["url"] = url;
+    }
 
     return output;
   }
 
-  /** Return String representation of EventGadgetPreferences */
+  /** Return String representation of EventSource */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -1653,10 +1617,7 @@ class Events {
       accessRole = json["accessRole"];
     }
     if (json.containsKey("defaultReminders")) {
-      defaultReminders = [];
-      json["defaultReminders"].forEach((item) {
-        defaultReminders.add(new EventReminder.fromJson(item));
-      });
+      defaultReminders = json["defaultReminders"].map((defaultRemindersItem) => new EventReminder.fromJson(defaultRemindersItem)).toList();
     }
     if (json.containsKey("description")) {
       description = json["description"];
@@ -1665,10 +1626,7 @@ class Events {
       etag = json["etag"];
     }
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Event.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Event.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -1695,10 +1653,7 @@ class Events {
       output["accessRole"] = accessRole;
     }
     if (defaultReminders != null) {
-      output["defaultReminders"] = new core.List();
-      defaultReminders.forEach((item) {
-        output["defaultReminders"].add(item.toJson());
-      });
+      output["defaultReminders"] = defaultReminders.map((defaultRemindersItem) => defaultRemindersItem.toJson()).toList();
     }
     if (description != null) {
       output["description"] = description;
@@ -1707,10 +1662,7 @@ class Events {
       output["etag"] = etag;
     }
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -1747,16 +1699,10 @@ class FreeBusyCalendar {
   /** Create new FreeBusyCalendar from JSON data */
   FreeBusyCalendar.fromJson(core.Map json) {
     if (json.containsKey("busy")) {
-      busy = [];
-      json["busy"].forEach((item) {
-        busy.add(new TimePeriod.fromJson(item));
-      });
+      busy = json["busy"].map((busyItem) => new TimePeriod.fromJson(busyItem)).toList();
     }
     if (json.containsKey("errors")) {
-      errors = [];
-      json["errors"].forEach((item) {
-        errors.add(new Error.fromJson(item));
-      });
+      errors = json["errors"].map((errorsItem) => new Error.fromJson(errorsItem)).toList();
     }
   }
 
@@ -1765,16 +1711,10 @@ class FreeBusyCalendar {
     var output = new core.Map();
 
     if (busy != null) {
-      output["busy"] = new core.List();
-      busy.forEach((item) {
-        output["busy"].add(item.toJson());
-      });
+      output["busy"] = busy.map((busyItem) => busyItem.toJson()).toList();
     }
     if (errors != null) {
-      output["errors"] = new core.List();
-      errors.forEach((item) {
-        output["errors"].add(item.toJson());
-      });
+      output["errors"] = errors.map((errorsItem) => errorsItem.toJson()).toList();
     }
 
     return output;
@@ -1796,16 +1736,10 @@ class FreeBusyGroup {
   /** Create new FreeBusyGroup from JSON data */
   FreeBusyGroup.fromJson(core.Map json) {
     if (json.containsKey("calendars")) {
-      calendars = [];
-      json["calendars"].forEach((item) {
-        calendars.add(item);
-      });
+      calendars = json["calendars"].toList();
     }
     if (json.containsKey("errors")) {
-      errors = [];
-      json["errors"].forEach((item) {
-        errors.add(new Error.fromJson(item));
-      });
+      errors = json["errors"].map((errorsItem) => new Error.fromJson(errorsItem)).toList();
     }
   }
 
@@ -1814,16 +1748,10 @@ class FreeBusyGroup {
     var output = new core.Map();
 
     if (calendars != null) {
-      output["calendars"] = new core.List();
-      calendars.forEach((item) {
-        output["calendars"].add(item);
-      });
+      output["calendars"] = calendars.toList();
     }
     if (errors != null) {
-      output["errors"] = new core.List();
-      errors.forEach((item) {
-        output["errors"].add(item.toJson());
-      });
+      output["errors"] = errors.map((errorsItem) => errorsItem.toJson()).toList();
     }
 
     return output;
@@ -1863,10 +1791,7 @@ class FreeBusyRequest {
       groupExpansionMax = json["groupExpansionMax"];
     }
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new FreeBusyRequestItem.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new FreeBusyRequestItem.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("timeMax")) {
       timeMax = json["timeMax"];
@@ -1890,10 +1815,7 @@ class FreeBusyRequest {
       output["groupExpansionMax"] = groupExpansionMax;
     }
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (timeMax != null) {
       output["timeMax"] = timeMax;
@@ -1944,10 +1866,10 @@ class FreeBusyRequestItem {
 class FreeBusyResponse {
 
   /** List of free/busy information for calendars. */
-  FreeBusyResponseCalendars calendars;
+  core.Map<core.String, FreeBusyCalendar> calendars;
 
   /** Expansion of groups. */
-  FreeBusyResponseGroups groups;
+  core.Map<core.String, FreeBusyGroup> groups;
 
   /** Type of the resource ("calendar#freeBusy"). */
   core.String kind;
@@ -1961,10 +1883,10 @@ class FreeBusyResponse {
   /** Create new FreeBusyResponse from JSON data */
   FreeBusyResponse.fromJson(core.Map json) {
     if (json.containsKey("calendars")) {
-      calendars = new FreeBusyResponseCalendars.fromJson(json["calendars"]);
+      calendars = _mapMap(json["calendars"], (calendarsItem) => new FreeBusyCalendar.fromJson(calendarsItem));
     }
     if (json.containsKey("groups")) {
-      groups = new FreeBusyResponseGroups.fromJson(json["groups"]);
+      groups = _mapMap(json["groups"], (groupsItem) => new FreeBusyGroup.fromJson(groupsItem));
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -1982,10 +1904,10 @@ class FreeBusyResponse {
     var output = new core.Map();
 
     if (calendars != null) {
-      output["calendars"] = calendars.toJson();
+      output["calendars"] = _mapMap(calendars, (calendarsItem) => calendarsItem.toJson());
     }
     if (groups != null) {
-      output["groups"] = groups.toJson();
+      output["groups"] = _mapMap(groups, (groupsItem) => groupsItem.toJson());
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -2001,46 +1923,6 @@ class FreeBusyResponse {
   }
 
   /** Return String representation of FreeBusyResponse */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** List of free/busy information for calendars. */
-class FreeBusyResponseCalendars {
-
-  /** Create new FreeBusyResponseCalendars from JSON data */
-  FreeBusyResponseCalendars.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for FreeBusyResponseCalendars */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of FreeBusyResponseCalendars */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Expansion of groups. */
-class FreeBusyResponseGroups {
-
-  /** Create new FreeBusyResponseGroups from JSON data */
-  FreeBusyResponseGroups.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for FreeBusyResponseGroups */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of FreeBusyResponseGroups */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -2117,10 +1999,7 @@ class Settings {
       etag = json["etag"];
     }
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Setting.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Setting.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -2135,10 +2014,7 @@ class Settings {
       output["etag"] = etag;
     }
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -2189,3 +2065,16 @@ class TimePeriod {
 
 }
 
+core.Map _mapMap(core.Map source, [core.Object convert(core.Object source) = null]) {
+  assert(source != null);
+  var result = new dart_collection.LinkedHashMap();
+  source.forEach((core.String key, value) {
+    assert(key != null);
+    if(convert == null) {
+      result[key] = value;
+    } else {
+      result[key] = convert(value);
+    }
+  });
+  return result;
+}

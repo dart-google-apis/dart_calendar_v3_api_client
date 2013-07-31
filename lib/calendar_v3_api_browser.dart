@@ -1,14 +1,20 @@
-library calendar_v3_api_browser;
+library calendar_v3_api.browser;
 
-import "calendar_v3_api_client.dart";
-export "calendar_v3_api_client.dart";
-
-import "dart:core" as core;
-import "dart:html" as html;
-import "dart:async" as async;
-import "dart:json" as JSON;
-import "package:js/js.dart" as js;
 import "package:google_oauth2_client/google_oauth2_browser.dart" as oauth;
 
-part "src/browser/browser_client.dart";
-part "src/browser/calendar.dart";
+import 'package:google_calendar_v3_api/src/cloud_api_browser.dart';
+import "package:google_calendar_v3_api/calendar_v3_api_client.dart";
+
+/** Lets you manipulate events and other calendar data. */
+class Calendar extends Client with BrowserClient {
+
+  /** OAuth Scope2: Manage your calendars */
+  static const String CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar";
+
+  /** OAuth Scope2: View your calendars */
+  static const String CALENDAR_READONLY_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
+
+  final oauth.OAuth2 auth;
+
+  Calendar([oauth.OAuth2 this.auth]);
+}
