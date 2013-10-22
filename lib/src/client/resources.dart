@@ -674,6 +674,7 @@ class ChannelsResource_ {
       _client = client;
 
   /**
+   * Stop watching resources through this channel
    *
    * [request] - Channel to send in this request
    *
@@ -1242,7 +1243,7 @@ class EventsResource_ {
   }
 
   /**
-   * Subscribe to changes in events collection
+   * Watch for changes to Events resources.
    *
    * [request] - Channel to send in this request
    *
@@ -1376,7 +1377,7 @@ class SettingsResource_ {
   /**
    * Returns a single user setting.
    *
-   * [setting] - Name of the user setting.
+   * [setting] - The id of the user setting.
    *
    * [optParams] - Additional query parameters
    */

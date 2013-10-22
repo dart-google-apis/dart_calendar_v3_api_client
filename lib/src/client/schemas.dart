@@ -51,7 +51,7 @@ class Acl {
   }
 
   /** Return String representation of Acl */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -120,7 +120,7 @@ class AclRule {
   }
 
   /** Return String representation of AclRule */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -162,7 +162,7 @@ class AclRuleScope {
   }
 
   /** Return String representation of AclRuleScope */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -244,7 +244,7 @@ class Calendar {
   }
 
   /** Return String representation of Calendar */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -299,7 +299,7 @@ class CalendarList {
   }
 
   /** Return String representation of CalendarList */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -466,37 +466,40 @@ class CalendarListEntry {
   }
 
   /** Return String representation of CalendarListEntry */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
 class Channel {
 
-  /** The address of the receiving entity where events are delivered. Specific to the channel type. */
+  /** The address where notifications are delivered for this channel. */
   core.String address;
 
-  /** The expiration instant for this channel if it is defined. */
+  /** Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional. */
   core.int expiration;
 
-  /** A UUID for the channel */
+  /** A UUID or similar unique string that identifies this channel. */
   core.String id;
 
-  /** A channel watching an API resource */
+  /** Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string "api#channel". */
   core.String kind;
 
-  /** Additional parameters controlling delivery channel behavior */
+  /** Additional parameters controlling delivery channel behavior. Optional. */
   core.Map<core.String, core.String> params;
 
-  /** An opaque id that identifies the resource that is being watched. Stable across different API versions */
+  /** A Boolean value to indicate whether payload is wanted. Optional. */
+  core.bool payload;
+
+  /** An opaque ID that identifies the resource being watched on this channel. Stable across different API versions. */
   core.String resourceId;
 
-  /** The canonicalized ID of the watched resource. */
+  /** A version-specific identifier for the watched resource. */
   core.String resourceUri;
 
-  /** An arbitrary string associated with the channel that is delivered to the target address with each event delivered over this channel. */
+  /** An arbitrary string delivered to the target address with each notification delivered over this channel. Optional. */
   core.String token;
 
-  /** The type of delivery mechanism used by this channel */
+  /** The type of delivery mechanism used for this channel. */
   core.String type;
 
   /** Create new Channel from JSON data */
@@ -515,6 +518,9 @@ class Channel {
     }
     if (json.containsKey("params")) {
       params = _mapMap(json["params"]);
+    }
+    if (json.containsKey("payload")) {
+      payload = json["payload"];
     }
     if (json.containsKey("resourceId")) {
       resourceId = json["resourceId"];
@@ -549,6 +555,9 @@ class Channel {
     if (params != null) {
       output["params"] = _mapMap(params);
     }
+    if (payload != null) {
+      output["payload"] = payload;
+    }
     if (resourceId != null) {
       output["resourceId"] = resourceId;
     }
@@ -566,7 +575,7 @@ class Channel {
   }
 
   /** Return String representation of Channel */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -603,7 +612,7 @@ class ColorDefinition {
   }
 
   /** Return String representation of ColorDefinition */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -658,7 +667,7 @@ class Colors {
   }
 
   /** Return String representation of Colors */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -699,7 +708,7 @@ class Error {
   }
 
   /** Return String representation of Error */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1051,7 +1060,7 @@ class Event {
   }
 
   /** Return String representation of Event */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1107,7 +1116,7 @@ class EventCreator {
   }
 
   /** Return String representation of EventCreator */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1145,7 +1154,7 @@ class EventExtendedProperties {
   }
 
   /** Return String representation of EventExtendedProperties */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1239,7 +1248,7 @@ class EventGadget {
   }
 
   /** Return String representation of EventGadget */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1295,7 +1304,7 @@ class EventOrganizer {
   }
 
   /** Return String representation of EventOrganizer */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1333,7 +1342,7 @@ class EventReminders {
   }
 
   /** Return String representation of EventReminders */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1371,7 +1380,7 @@ class EventSource {
   }
 
   /** Return String representation of EventSource */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1484,7 +1493,7 @@ class EventAttendee {
   }
 
   /** Return String representation of EventAttendee */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1530,7 +1539,7 @@ class EventDateTime {
   }
 
   /** Return String representation of EventDateTime */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1570,7 +1579,7 @@ class EventReminder {
   }
 
   /** Return String representation of EventReminder */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1684,7 +1693,7 @@ class Events {
   }
 
   /** Return String representation of Events */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1721,7 +1730,7 @@ class FreeBusyCalendar {
   }
 
   /** Return String representation of FreeBusyCalendar */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1758,7 +1767,7 @@ class FreeBusyGroup {
   }
 
   /** Return String representation of FreeBusyGroup */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1831,7 +1840,7 @@ class FreeBusyRequest {
   }
 
   /** Return String representation of FreeBusyRequest */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1859,7 +1868,7 @@ class FreeBusyRequestItem {
   }
 
   /** Return String representation of FreeBusyRequestItem */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1923,7 +1932,7 @@ class FreeBusyResponse {
   }
 
   /** Return String representation of FreeBusyResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1932,13 +1941,13 @@ class Setting {
   /** ETag of the resource. */
   core.String etag;
 
-  /** Name of the user setting. */
+  /** The id of the user setting. */
   core.String id;
 
   /** Type of the resource ("calendar#setting"). */
   core.String kind;
 
-  /** Value of the user setting. The format of the value depends on the ID of the setting. */
+  /** Value of the user setting. The format of the value depends on the ID of the setting. It must always be any UTF-8 string of length up to 1024 characters. */
   core.String value;
 
   /** Create new Setting from JSON data */
@@ -1978,7 +1987,7 @@ class Setting {
   }
 
   /** Return String representation of Setting */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2024,7 +2033,7 @@ class Settings {
   }
 
   /** Return String representation of Settings */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2061,7 +2070,7 @@ class TimePeriod {
   }
 
   /** Return String representation of TimePeriod */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
