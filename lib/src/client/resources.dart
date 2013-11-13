@@ -999,7 +999,13 @@ class EventsResource_ {
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
+   * [privateExtendedProperty] - Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.
+   *   Repeated values: allowed
+   *
    * [q] - Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
+   *
+   * [sharedExtendedProperty] - Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
+   *   Repeated values: allowed
    *
    * [showDeleted] - Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
    *
@@ -1017,7 +1023,7 @@ class EventsResource_ {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<Events> list(core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.String q, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
+  async.Future<Events> list(core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.List<core.String> privateExtendedProperty, core.String q, core.List<core.String> sharedExtendedProperty, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
     var url = "calendars/{calendarId}/events";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1034,7 +1040,9 @@ class EventsResource_ {
     }
     if (orderBy != null) queryParams["orderBy"] = orderBy;
     if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (privateExtendedProperty != null) queryParams["privateExtendedProperty"] = privateExtendedProperty;
     if (q != null) queryParams["q"] = q;
+    if (sharedExtendedProperty != null) queryParams["sharedExtendedProperty"] = sharedExtendedProperty;
     if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
     if (showHiddenInvitations != null) queryParams["showHiddenInvitations"] = showHiddenInvitations;
     if (singleEvents != null) queryParams["singleEvents"] = singleEvents;
@@ -1266,7 +1274,13 @@ class EventsResource_ {
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
+   * [privateExtendedProperty] - Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.
+   *   Repeated values: allowed
+   *
    * [q] - Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
+   *
+   * [sharedExtendedProperty] - Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
+   *   Repeated values: allowed
    *
    * [showDeleted] - Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
    *
@@ -1284,7 +1298,7 @@ class EventsResource_ {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<Channel> watch(Channel request, core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.String q, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
+  async.Future<Channel> watch(Channel request, core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.List<core.String> privateExtendedProperty, core.String q, core.List<core.String> sharedExtendedProperty, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
     var url = "calendars/{calendarId}/events/watch";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1301,7 +1315,9 @@ class EventsResource_ {
     }
     if (orderBy != null) queryParams["orderBy"] = orderBy;
     if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (privateExtendedProperty != null) queryParams["privateExtendedProperty"] = privateExtendedProperty;
     if (q != null) queryParams["q"] = q;
+    if (sharedExtendedProperty != null) queryParams["sharedExtendedProperty"] = sharedExtendedProperty;
     if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
     if (showHiddenInvitations != null) queryParams["showHiddenInvitations"] = showHiddenInvitations;
     if (singleEvents != null) queryParams["singleEvents"] = singleEvents;

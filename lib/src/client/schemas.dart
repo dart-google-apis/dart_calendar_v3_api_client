@@ -1947,7 +1947,7 @@ class Setting {
   /** Type of the resource ("calendar#setting"). */
   core.String kind;
 
-  /** Value of the user setting. The format of the value depends on the ID of the setting. It must always be any UTF-8 string of length up to 1024 characters. */
+  /** Value of the user setting. The format of the value depends on the ID of the setting. It must always be a UTF-8 string of length up to 1024 characters. */
   core.String value;
 
   /** Create new Setting from JSON data */
