@@ -342,6 +342,8 @@ class CalendarListEntry {
   /** Geographic location of the calendar as free-form text. Optional. Read-only. */
   core.String location;
 
+  CalendarListEntryNotificationSettings notificationSettings;
+
   /** Whether the calendar is the primary calendar of the authenticated user. Read-only. Optional. The default is False. */
   core.bool primary;
 
@@ -391,6 +393,9 @@ class CalendarListEntry {
     }
     if (json.containsKey("location")) {
       location = json["location"];
+    }
+    if (json.containsKey("notificationSettings")) {
+      notificationSettings = new CalendarListEntryNotificationSettings.fromJson(json["notificationSettings"]);
     }
     if (json.containsKey("primary")) {
       primary = json["primary"];
@@ -446,6 +451,9 @@ class CalendarListEntry {
     if (location != null) {
       output["location"] = location;
     }
+    if (notificationSettings != null) {
+      output["notificationSettings"] = notificationSettings.toJson();
+    }
     if (primary != null) {
       output["primary"] = primary;
     }
@@ -466,6 +474,77 @@ class CalendarListEntry {
   }
 
   /** Return String representation of CalendarListEntry */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class CalendarListEntryNotificationSettings {
+
+  core.List<CalendarNotification> notifications;
+
+  /** Create new CalendarListEntryNotificationSettings from JSON data */
+  CalendarListEntryNotificationSettings.fromJson(core.Map json) {
+    if (json.containsKey("notifications")) {
+      notifications = json["notifications"].map((notificationsItem) => new CalendarNotification.fromJson(notificationsItem)).toList();
+    }
+  }
+
+  /** Create JSON Object for CalendarListEntryNotificationSettings */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (notifications != null) {
+      output["notifications"] = notifications.map((notificationsItem) => notificationsItem.toJson()).toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of CalendarListEntryNotificationSettings */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class CalendarNotification {
+
+  /** The method used to deliver the notification. Possible values are:  
+- "email" - Reminders are sent via email. 
+- "sms" - Reminders are sent via SMS. */
+  core.String method;
+
+  /** The type of notification. Possible values are:  
+- "eventCreation" - Notification sent when a new event has been put on the calendar. 
+- "eventChange" - Notification sent when an event was changed. 
+- "eventCancellation" - Notification sent when an event was cancelled. 
+- "eventResponse" - Notification sent when an event was changed. 
+- "agenda" - An agenda with the events of the day (sent out in the morning). */
+  core.String type;
+
+  /** Create new CalendarNotification from JSON data */
+  CalendarNotification.fromJson(core.Map json) {
+    if (json.containsKey("method")) {
+      method = json["method"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for CalendarNotification */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (method != null) {
+      output["method"] = method;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of CalendarNotification */
   core.String toString() => JSON.encode(this.toJson());
 
 }

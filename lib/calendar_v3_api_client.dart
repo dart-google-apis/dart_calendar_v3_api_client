@@ -11,3 +11,4 @@ export 'package:google_calendar_v3_api/src/client_base.dart' show APIRequestErro
 part 'src/client/client.dart';
 part 'src/client/schemas.dart';
 part 'src/client/resources.dart';
+part 'src/client/utils.dart';
