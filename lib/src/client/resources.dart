@@ -120,9 +120,18 @@ class AclResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
+   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   *   Minimum: 1
+   *
+   * [pageToken] - Token specifying which result page to return. Optional.
+   *
+   * [showDeleted] - Whether to include deleted acls in the result. Deleted acls are represented by with 'role' equal to 'none'. Deleted acls will always be included if 'syncToken' is provided. Optional. The default is False.
+   *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned as part of the result of a previous call to this method. It makes the result of this call contain only entries that have changed since the last call, including entries that have been removed in the meantime (they will have the 'role' set to 'none'). Optional. The default is to return to all entries.
+   *
    * [optParams] - Additional query parameters
    */
-  async.Future<Acl> list(core.String calendarId, {core.Map optParams}) {
+  async.Future<Acl> list(core.String calendarId, {core.int maxResults, core.String pageToken, core.bool showDeleted, core.String syncToken, core.Map optParams}) {
     var url = "calendars/{calendarId}/acl";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -130,6 +139,10 @@ class AclResource_ {
     var paramErrors = new core.List();
     if (calendarId == null) paramErrors.add("calendarId is required");
     if (calendarId != null) urlParams["calendarId"] = calendarId;
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -225,6 +238,54 @@ class AclResource_ {
     return response
       .then((data) => new AclRule.fromJson(data));
   }
+
+  /**
+   * Watch for changes to ACL resources.
+   *
+   * [request] - Channel to send in this request
+   *
+   * [calendarId] - Calendar identifier.
+   *
+   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   *   Minimum: 1
+   *
+   * [pageToken] - Token specifying which result page to return. Optional.
+   *
+   * [showDeleted] - Whether to include deleted acls in the result. Deleted acls are represented by with 'role' equal to 'none'. Deleted acls will always be included if 'syncToken' is provided. Optional. The default is False.
+   *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned as part of the result of a previous call to this method. It makes the result of this call contain only entries that have changed since the last call, including entries that have been removed in the meantime (they will have the 'role' set to 'none'). Optional. The default is to return to all entries.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Channel> watch(Channel request, core.String calendarId, {core.int maxResults, core.String pageToken, core.bool showDeleted, core.String syncToken, core.Map optParams}) {
+    var url = "calendars/{calendarId}/acl/watch";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (calendarId == null) paramErrors.add("calendarId is required");
+    if (calendarId != null) urlParams["calendarId"] = calendarId;
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Channel.fromJson(data));
+  }
 }
 
 class CalendarListResource_ {
@@ -304,7 +365,7 @@ class CalendarListResource_ {
    *
    * [request] - CalendarListEntry to send in this request
    *
-   * [colorRgbFormat] - Whether to use the 'foregroundColor' and 'backgroundColor' fields to write the calendar colors (RGB). If this feature is used, the index-based 'colorId' field will be set to the best matching option automatically. Optional. The default is False.
+   * [colorRgbFormat] - Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
    *
    * [optParams] - Additional query parameters
    */
@@ -348,11 +409,15 @@ class CalendarListResource_ {
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
+   * [showDeleted] - Whether to include deleted calendar list entries in the result. Optional. The default is False.
+   *
    * [showHidden] - Whether to show hidden entries. Optional. The default is False.
+   *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<CalendarList> list({core.int maxResults, core.String minAccessRole, core.String pageToken, core.bool showHidden, core.Map optParams}) {
+  async.Future<CalendarList> list({core.int maxResults, core.String minAccessRole, core.String pageToken, core.bool showDeleted, core.bool showHidden, core.String syncToken, core.Map optParams}) {
     var url = "users/me/calendarList";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -364,7 +429,9 @@ class CalendarListResource_ {
     }
     if (minAccessRole != null) queryParams["minAccessRole"] = minAccessRole;
     if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
     if (showHidden != null) queryParams["showHidden"] = showHidden;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -457,6 +524,64 @@ class CalendarListResource_ {
     response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
     return response
       .then((data) => new CalendarListEntry.fromJson(data));
+  }
+
+  /**
+   * Watch for changes to CalendarList resources.
+   *
+   * [request] - Channel to send in this request
+   *
+   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   *   Minimum: 1
+   *
+   * [minAccessRole] - The minimum access role for the user in the returned entires. Optional. The default is no restriction.
+   *   Allowed values:
+   *     freeBusyReader - The user can read free/busy information.
+   *     owner - The user can read and modify events and access control lists.
+   *     reader - The user can read events that are not private.
+   *     writer - The user can read and modify events.
+   *
+   * [pageToken] - Token specifying which result page to return. Optional.
+   *
+   * [showDeleted] - Whether to include deleted calendar list entries in the result. Optional. The default is False.
+   *
+   * [showHidden] - Whether to show hidden entries. Optional. The default is False.
+   *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Channel> watch(Channel request, {core.int maxResults, core.String minAccessRole, core.String pageToken, core.bool showDeleted, core.bool showHidden, core.String syncToken, core.Map optParams}) {
+    var url = "users/me/calendarList/watch";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (minAccessRole != null && !["freeBusyReader", "owner", "reader", "writer"].contains(minAccessRole)) {
+      paramErrors.add("Allowed values for minAccessRole: freeBusyReader, owner, reader, writer");
+    }
+    if (minAccessRole != null) queryParams["minAccessRole"] = minAccessRole;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
+    if (showHidden != null) queryParams["showHidden"] = showHidden;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Channel.fromJson(data));
   }
 }
 
@@ -1013,6 +1138,8 @@ class EventsResource_ {
    *
    * [singleEvents] - Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
    *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   *
    * [timeMax] - Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.
    *
    * [timeMin] - Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time.
@@ -1023,7 +1150,7 @@ class EventsResource_ {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<Events> list(core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.List<core.String> privateExtendedProperty, core.String q, core.List<core.String> sharedExtendedProperty, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
+  async.Future<Events> list(core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.List<core.String> privateExtendedProperty, core.String q, core.List<core.String> sharedExtendedProperty, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String syncToken, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
     var url = "calendars/{calendarId}/events";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1046,6 +1173,7 @@ class EventsResource_ {
     if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
     if (showHiddenInvitations != null) queryParams["showHiddenInvitations"] = showHiddenInvitations;
     if (singleEvents != null) queryParams["singleEvents"] = singleEvents;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
     if (timeMax != null) queryParams["timeMax"] = timeMax;
     if (timeMin != null) queryParams["timeMin"] = timeMin;
     if (timeZone != null) queryParams["timeZone"] = timeZone;
@@ -1288,6 +1416,8 @@ class EventsResource_ {
    *
    * [singleEvents] - Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
    *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   *
    * [timeMax] - Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.
    *
    * [timeMin] - Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time.
@@ -1298,7 +1428,7 @@ class EventsResource_ {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<Channel> watch(Channel request, core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.List<core.String> privateExtendedProperty, core.String q, core.List<core.String> sharedExtendedProperty, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
+  async.Future<Channel> watch(Channel request, core.String calendarId, {core.bool alwaysIncludeEmail, core.String iCalUID, core.int maxAttendees, core.int maxResults, core.String orderBy, core.String pageToken, core.List<core.String> privateExtendedProperty, core.String q, core.List<core.String> sharedExtendedProperty, core.bool showDeleted, core.bool showHiddenInvitations, core.bool singleEvents, core.String syncToken, core.String timeMax, core.String timeMin, core.String timeZone, core.String updatedMin, core.Map optParams}) {
     var url = "calendars/{calendarId}/events/watch";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -1321,6 +1451,7 @@ class EventsResource_ {
     if (showDeleted != null) queryParams["showDeleted"] = showDeleted;
     if (showHiddenInvitations != null) queryParams["showHiddenInvitations"] = showHiddenInvitations;
     if (singleEvents != null) queryParams["singleEvents"] = singleEvents;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
     if (timeMax != null) queryParams["timeMax"] = timeMax;
     if (timeMin != null) queryParams["timeMin"] = timeMin;
     if (timeZone != null) queryParams["timeZone"] = timeZone;
@@ -1426,14 +1557,24 @@ class SettingsResource_ {
   /**
    * Returns all user settings for the authenticated user.
    *
+   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   *   Minimum: 1
+   *
+   * [pageToken] - Token specifying which result page to return. Optional.
+   *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   *
    * [optParams] - Additional query parameters
    */
-  async.Future<Settings> list({core.Map optParams}) {
+  async.Future<Settings> list({core.int maxResults, core.String pageToken, core.String syncToken, core.Map optParams}) {
     var url = "users/me/settings";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
 
     var paramErrors = new core.List();
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -1450,6 +1591,47 @@ class SettingsResource_ {
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
     return response
       .then((data) => new Settings.fromJson(data));
+  }
+
+  /**
+   * Watch for changes to Settings resources.
+   *
+   * [request] - Channel to send in this request
+   *
+   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   *   Minimum: 1
+   *
+   * [pageToken] - Token specifying which result page to return. Optional.
+   *
+   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Channel> watch(Channel request, {core.int maxResults, core.String pageToken, core.String syncToken, core.Map optParams}) {
+    var url = "users/me/settings/watch";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
+    if (syncToken != null) queryParams["syncToken"] = syncToken;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Channel.fromJson(data));
   }
 }
 

@@ -14,6 +14,9 @@ class Acl {
   /** Token used to access the next page of this result. Omitted if no further results are available. */
   core.String nextPageToken;
 
+  /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. */
+  core.String nextSyncToken;
+
   /** Create new Acl from JSON data */
   Acl.fromJson(core.Map json) {
     if (json.containsKey("etag")) {
@@ -27,6 +30,9 @@ class Acl {
     }
     if (json.containsKey("nextPageToken")) {
       nextPageToken = json["nextPageToken"];
+    }
+    if (json.containsKey("nextSyncToken")) {
+      nextSyncToken = json["nextSyncToken"];
     }
   }
 
@@ -45,6 +51,9 @@ class Acl {
     }
     if (nextPageToken != null) {
       output["nextPageToken"] = nextPageToken;
+    }
+    if (nextSyncToken != null) {
+      output["nextSyncToken"] = nextSyncToken;
     }
 
     return output;
@@ -262,6 +271,9 @@ class CalendarList {
   /** Token used to access the next page of this result. */
   core.String nextPageToken;
 
+  /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
+  core.String nextSyncToken;
+
   /** Create new CalendarList from JSON data */
   CalendarList.fromJson(core.Map json) {
     if (json.containsKey("etag")) {
@@ -275,6 +287,9 @@ class CalendarList {
     }
     if (json.containsKey("nextPageToken")) {
       nextPageToken = json["nextPageToken"];
+    }
+    if (json.containsKey("nextSyncToken")) {
+      nextSyncToken = json["nextSyncToken"];
     }
   }
 
@@ -293,6 +308,9 @@ class CalendarList {
     }
     if (nextPageToken != null) {
       output["nextPageToken"] = nextPageToken;
+    }
+    if (nextSyncToken != null) {
+      output["nextSyncToken"] = nextSyncToken;
     }
 
     return output;
@@ -321,6 +339,9 @@ class CalendarListEntry {
   /** The default reminders that the authenticated user has for this calendar. */
   core.List<EventReminder> defaultReminders;
 
+  /** Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False. */
+  core.bool deleted;
+
   /** Description of the calendar. Optional. Read-only. */
   core.String description;
 
@@ -342,6 +363,7 @@ class CalendarListEntry {
   /** Geographic location of the calendar as free-form text. Optional. Read-only. */
   core.String location;
 
+  /** The notifications that the authenticated user is receiving for this calendar. */
   CalendarListEntryNotificationSettings notificationSettings;
 
   /** Whether the calendar is the primary calendar of the authenticated user. Read-only. Optional. The default is False. */
@@ -372,6 +394,9 @@ class CalendarListEntry {
     }
     if (json.containsKey("defaultReminders")) {
       defaultReminders = json["defaultReminders"].map((defaultRemindersItem) => new EventReminder.fromJson(defaultRemindersItem)).toList();
+    }
+    if (json.containsKey("deleted")) {
+      deleted = json["deleted"];
     }
     if (json.containsKey("description")) {
       description = json["description"];
@@ -430,6 +455,9 @@ class CalendarListEntry {
     if (defaultReminders != null) {
       output["defaultReminders"] = defaultReminders.map((defaultRemindersItem) => defaultRemindersItem.toJson()).toList();
     }
+    if (deleted != null) {
+      output["deleted"] = deleted;
+    }
     if (description != null) {
       output["description"] = description;
     }
@@ -478,8 +506,10 @@ class CalendarListEntry {
 
 }
 
+/** The notifications that the authenticated user is receiving for this calendar. */
 class CalendarListEntryNotificationSettings {
 
+  /** The list of notifications set for this calendar. */
   core.List<CalendarNotification> notifications;
 
   /** Create new CalendarListEntryNotificationSettings from JSON data */
@@ -509,14 +539,14 @@ class CalendarNotification {
 
   /** The method used to deliver the notification. Possible values are:  
 - "email" - Reminders are sent via email. 
-- "sms" - Reminders are sent via SMS. */
+- "sms" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates. */
   core.String method;
 
   /** The type of notification. Possible values are:  
-- "eventCreation" - Notification sent when a new event has been put on the calendar. 
-- "eventChange" - Notification sent when an event was changed. 
-- "eventCancellation" - Notification sent when an event was cancelled. 
-- "eventResponse" - Notification sent when an event was changed. 
+- "eventCreation" - Notification sent when a new event is put on the calendar. 
+- "eventChange" - Notification sent when an event is changed. 
+- "eventCancellation" - Notification sent when an event is cancelled. 
+- "eventResponse" - Notification sent when an event is changed. 
 - "agenda" - An agenda with the events of the day (sent out in the morning). */
   core.String type;
 
@@ -847,7 +877,10 @@ class Event {
   /** Event ID in the iCalendar format. */
   core.String iCalUID;
 
-  /** Identifier of the event. */
+  /** Identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:  
+- characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938 
+- the length of the ID must be between 5 and 1024 characters 
+- the ID must be unique per calendar  Due to the globally distributed nature of the system, we cannot guarantee that ID collisions will be detected at event creation time. To minimize the risk of collisions we recommend using an established UUID algorithm such as one described in RFC4122. */
   core.String id;
 
   /** Type of the resource ("calendar#event"). */
@@ -1690,6 +1723,9 @@ class Events {
   /** Token used to access the next page of this result. Omitted if no further results are available. */
   core.String nextPageToken;
 
+  /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
+  core.String nextSyncToken;
+
   /** Title of the calendar. Read-only. */
   core.String summary;
 
@@ -1721,6 +1757,9 @@ class Events {
     }
     if (json.containsKey("nextPageToken")) {
       nextPageToken = json["nextPageToken"];
+    }
+    if (json.containsKey("nextSyncToken")) {
+      nextSyncToken = json["nextSyncToken"];
     }
     if (json.containsKey("summary")) {
       summary = json["summary"];
@@ -1757,6 +1796,9 @@ class Events {
     }
     if (nextPageToken != null) {
       output["nextPageToken"] = nextPageToken;
+    }
+    if (nextSyncToken != null) {
+      output["nextSyncToken"] = nextSyncToken;
     }
     if (summary != null) {
       output["summary"] = summary;
@@ -2081,6 +2123,12 @@ class Settings {
   /** Type of the collection ("calendar#settings"). */
   core.String kind;
 
+  /** Token used to access the next page of this result. */
+  core.String nextPageToken;
+
+  /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
+  core.String nextSyncToken;
+
   /** Create new Settings from JSON data */
   Settings.fromJson(core.Map json) {
     if (json.containsKey("etag")) {
@@ -2091,6 +2139,12 @@ class Settings {
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
+    }
+    if (json.containsKey("nextPageToken")) {
+      nextPageToken = json["nextPageToken"];
+    }
+    if (json.containsKey("nextSyncToken")) {
+      nextSyncToken = json["nextSyncToken"];
     }
   }
 
@@ -2106,6 +2160,12 @@ class Settings {
     }
     if (kind != null) {
       output["kind"] = kind;
+    }
+    if (nextPageToken != null) {
+      output["nextPageToken"] = nextPageToken;
+    }
+    if (nextSyncToken != null) {
+      output["nextSyncToken"] = nextSyncToken;
     }
 
     return output;
