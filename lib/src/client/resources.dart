@@ -120,14 +120,17 @@ class AclResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
-   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   * [maxResults] - Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
    *   Minimum: 1
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
-   * [showDeleted] - Whether to include deleted acls in the result. Deleted acls are represented by with 'role' equal to 'none'. Deleted acls will always be included if 'syncToken' is provided. Optional. The default is False.
+   * [showDeleted] - Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned as part of the result of a previous call to this method. It makes the result of this call contain only entries that have changed since the last call, including entries that have been removed in the meantime (they will have the 'role' set to 'none'). Optional. The default is to return to all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */
@@ -246,14 +249,17 @@ class AclResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
-   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   * [maxResults] - Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
    *   Minimum: 1
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
-   * [showDeleted] - Whether to include deleted acls in the result. Deleted acls are represented by with 'role' equal to 'none'. Deleted acls will always be included if 'syncToken' is provided. Optional. The default is False.
+   * [showDeleted] - Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned as part of the result of a previous call to this method. It makes the result of this call contain only entries that have changed since the last call, including entries that have been removed in the meantime (they will have the 'role' set to 'none'). Optional. The default is to return to all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */
@@ -397,7 +403,7 @@ class CalendarListResource_ {
   /**
    * Returns entries on the user's calendar list.
    *
-   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   * [maxResults] - Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
    *   Minimum: 1
    *
    * [minAccessRole] - The minimum access role for the user in the returned entires. Optional. The default is no restriction.
@@ -413,7 +419,11 @@ class CalendarListResource_ {
    *
    * [showHidden] - Whether to show hidden entries. Optional. The default is False.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
+To ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.
+If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */
@@ -457,7 +467,7 @@ class CalendarListResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
-   * [colorRgbFormat] - Whether to use the 'foregroundColor' and 'backgroundColor' fields to write the calendar colors (RGB). If this feature is used, the index-based 'colorId' field will be set to the best matching option automatically. Optional. The default is False.
+   * [colorRgbFormat] - Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
    *
    * [optParams] - Additional query parameters
    */
@@ -495,7 +505,7 @@ class CalendarListResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
-   * [colorRgbFormat] - Whether to use the 'foregroundColor' and 'backgroundColor' fields to write the calendar colors (RGB). If this feature is used, the index-based 'colorId' field will be set to the best matching option automatically. Optional. The default is False.
+   * [colorRgbFormat] - Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
    *
    * [optParams] - Additional query parameters
    */
@@ -531,7 +541,7 @@ class CalendarListResource_ {
    *
    * [request] - Channel to send in this request
    *
-   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   * [maxResults] - Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
    *   Minimum: 1
    *
    * [minAccessRole] - The minimum access role for the user in the returned entires. Optional. The default is no restriction.
@@ -547,7 +557,11 @@ class CalendarListResource_ {
    *
    * [showHidden] - Whether to show hidden entries. Optional. The default is False.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
+To ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.
+If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */
@@ -919,7 +933,7 @@ class EventsResource_ {
    *
    * [eventId] - Event identifier.
    *
-   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   * [alwaysIncludeEmail] - Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
    *
    * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
    *   Minimum: 1
@@ -1043,19 +1057,19 @@ class EventsResource_ {
    *
    * [eventId] - Recurring event identifier.
    *
-   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   * [alwaysIncludeEmail] - Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
    *
    * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
    *   Minimum: 1
    *
-   * [maxResults] - Maximum number of events returned on one result page. Optional.
+   * [maxResults] - Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
    *   Minimum: 1
    *
    * [originalStart] - The original start time of the instance in the result. Optional.
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
-   * [showDeleted] - Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled instances of recurring events will still be included if 'singleEvents' is False. Optional. The default is False.
+   * [showDeleted] - Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events will still be included if singleEvents is False. Optional. The default is False.
    *
    * [timeMax] - Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.
    *
@@ -1107,19 +1121,19 @@ class EventsResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
-   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   * [alwaysIncludeEmail] - Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
    *
-   * [iCalUID] - Specifies iCalendar UID (iCalUID) of events to be included in the response. Optional.
+   * [iCalUID] - Specifies event ID in the iCalendar format to be included in the response. Optional.
    *
    * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
    *   Minimum: 1
    *
-   * [maxResults] - Maximum number of events returned on one result page. Optional.
+   * [maxResults] - Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
    *   Minimum: 1
    *
    * [orderBy] - The order of the events returned in the result. Optional. The default is an unspecified, stable order.
    *   Allowed values:
-   *     startTime - Order by the start date/time (ascending). This is only available when querying single events (i.e. the parameter "singleEvents" is True)
+   *     startTime - Order by the start date/time (ascending). This is only available when querying single events (i.e. the parameter singleEvents is True)
    *     updated - Order by last modification time (ascending).
    *
    * [pageToken] - Token specifying which result page to return. Optional.
@@ -1132,13 +1146,26 @@ class EventsResource_ {
    * [sharedExtendedProperty] - Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
    *   Repeated values: allowed
    *
-   * [showDeleted] - Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
+   * [showDeleted] - Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
    *
    * [showHiddenInvitations] - Whether to include hidden invitations in the result. Optional. The default is False.
    *
    * [singleEvents] - Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
+
+These are: 
+- iCalUID 
+- orderBy 
+- privateExtendedProperty 
+- q 
+- sharedExtendedProperty 
+- timeMin 
+- timeMax 
+- updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [timeMax] - Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.
    *
@@ -1146,7 +1173,7 @@ class EventsResource_ {
    *
    * [timeZone] - Time zone used in the response. Optional. The default is the time zone of the calendar.
    *
-   * [updatedMin] - Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by last modification time.
+   * [updatedMin] - Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
    *
    * [optParams] - Additional query parameters
    */
@@ -1249,7 +1276,7 @@ class EventsResource_ {
    *
    * [eventId] - Event identifier.
    *
-   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   * [alwaysIncludeEmail] - Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
    *
    * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
    *   Minimum: 1
@@ -1338,7 +1365,7 @@ class EventsResource_ {
    *
    * [eventId] - Event identifier.
    *
-   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   * [alwaysIncludeEmail] - Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
    *
    * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
    *   Minimum: 1
@@ -1385,19 +1412,19 @@ class EventsResource_ {
    *
    * [calendarId] - Calendar identifier.
    *
-   * [alwaysIncludeEmail] - Whether to always include a value in the "email" field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
+   * [alwaysIncludeEmail] - Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.
    *
-   * [iCalUID] - Specifies iCalendar UID (iCalUID) of events to be included in the response. Optional.
+   * [iCalUID] - Specifies event ID in the iCalendar format to be included in the response. Optional.
    *
    * [maxAttendees] - The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
    *   Minimum: 1
    *
-   * [maxResults] - Maximum number of events returned on one result page. Optional.
+   * [maxResults] - Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
    *   Minimum: 1
    *
    * [orderBy] - The order of the events returned in the result. Optional. The default is an unspecified, stable order.
    *   Allowed values:
-   *     startTime - Order by the start date/time (ascending). This is only available when querying single events (i.e. the parameter "singleEvents" is True)
+   *     startTime - Order by the start date/time (ascending). This is only available when querying single events (i.e. the parameter singleEvents is True)
    *     updated - Order by last modification time (ascending).
    *
    * [pageToken] - Token specifying which result page to return. Optional.
@@ -1410,13 +1437,26 @@ class EventsResource_ {
    * [sharedExtendedProperty] - Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
    *   Repeated values: allowed
    *
-   * [showDeleted] - Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
+   * [showDeleted] - Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
    *
    * [showHiddenInvitations] - Whether to include hidden invitations in the result. Optional. The default is False.
    *
    * [singleEvents] - Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
+
+These are: 
+- iCalUID 
+- orderBy 
+- privateExtendedProperty 
+- q 
+- sharedExtendedProperty 
+- timeMin 
+- timeMax 
+- updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [timeMax] - Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.
    *
@@ -1424,7 +1464,7 @@ class EventsResource_ {
    *
    * [timeZone] - Time zone used in the response. Optional. The default is the time zone of the calendar.
    *
-   * [updatedMin] - Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by last modification time.
+   * [updatedMin] - Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
    *
    * [optParams] - Additional query parameters
    */
@@ -1557,12 +1597,15 @@ class SettingsResource_ {
   /**
    * Returns all user settings for the authenticated user.
    *
-   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   * [maxResults] - Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
    *   Minimum: 1
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */
@@ -1598,12 +1641,15 @@ class SettingsResource_ {
    *
    * [request] - Channel to send in this request
    *
-   * [maxResults] - Maximum number of entries returned on one result page. Optional.
+   * [maxResults] - Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
    *   Minimum: 1
    *
    * [pageToken] - Token specifying which result page to return. Optional.
    *
-   * [syncToken] - Token obtained from the 'nextSyncToken' field returned on the last result page of the previous method's call. It makes the result of this call contain only entries that have changed since the last call. Optional. The default is to return all entries.
+   * [syncToken] - Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+Learn more about incremental synchronization.
+Optional. The default is to return all entries.
    *
    * [optParams] - Additional query parameters
    */

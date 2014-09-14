@@ -6,6 +6,7 @@ import 'package:google_calendar_v3_api/src/browser_client.dart';
 import "package:google_calendar_v3_api/calendar_v3_api_client.dart";
 
 /** Lets you manipulate events and other calendar data. */
+@deprecated
 class Calendar extends Client with BrowserClient {
 
   /** OAuth Scope2: Manage your calendars */

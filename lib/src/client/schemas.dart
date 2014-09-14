@@ -11,10 +11,10 @@ class Acl {
   /** Type of the collection ("calendar#acl"). */
   core.String kind;
 
-  /** Token used to access the next page of this result. Omitted if no further results are available. */
+  /** Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided. */
   core.String nextPageToken;
 
-  /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. */
+  /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
   core.String nextSyncToken;
 
   /** Create new Acl from JSON data */
@@ -268,7 +268,7 @@ class CalendarList {
   /** Type of the collection ("calendar#calendarList"). */
   core.String kind;
 
-  /** Token used to access the next page of this result. */
+  /** Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided. */
   core.String nextPageToken;
 
   /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
@@ -330,10 +330,10 @@ class CalendarListEntry {
 - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs. */
   core.String accessRole;
 
-  /** The main color of the calendar in the format '#0088aa'. This property supersedes the index-based colorId property. Optional. */
+  /** The main color of the calendar in the hexadecimal format "#0088aa". This property supersedes the index-based colorId property. Optional. */
   core.String backgroundColor;
 
-  /** The color of the calendar. This is an ID referring to an entry in the "calendar" section of the colors definition (see the "colors" endpoint). Optional. */
+  /** The color of the calendar. This is an ID referring to an entry in the calendar section of the colors definition (see the colors endpoint). Optional. */
   core.String colorId;
 
   /** The default reminders that the authenticated user has for this calendar. */
@@ -348,7 +348,7 @@ class CalendarListEntry {
   /** ETag of the resource. */
   core.String etag;
 
-  /** The foreground color of the calendar in the format '#ffffff'. This property supersedes the index-based colorId property. Optional. */
+  /** The foreground color of the calendar in the hexadecimal format "#ffffff". This property supersedes the index-based colorId property. Optional. */
   core.String foregroundColor;
 
   /** Whether the calendar has been hidden from the list. Optional. The default is False. */
@@ -727,10 +727,10 @@ class ColorDefinition {
 
 class Colors {
 
-  /** Palette of calendar colors, mapping from the color ID to its definition. An 'calendarListEntry' resource refers to one of these color IDs in its 'color' field. Read-only. */
+  /** Palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its color field. Read-only. */
   core.Map<core.String, ColorDefinition> calendar;
 
-  /** Palette of event colors, mapping from the color ID to its definition. An 'event' resource may refer to one of these color IDs in its 'color' field. Read-only. */
+  /** Palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its color field. Read-only. */
   core.Map<core.String, ColorDefinition> event;
 
   /** Type of the resource ("calendar#colors"). */
@@ -829,10 +829,10 @@ class Event {
   /** The attendees of the event. */
   core.List<EventAttendee> attendees;
 
-  /** Whether attendees may have been omitted from the event's representation. When retrieving an event, this may be due to a restriction specified by the 'maxAttendee' query parameter. When updating an event, this can be used to only update the participant's response. Optional. The default is False. */
+  /** Whether attendees may have been omitted from the event's representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant's response. Optional. The default is False. */
   core.bool attendeesOmitted;
 
-  /** The color of the event. This is an ID referring to an entry in the "event" section of the colors definition (see the "colors" endpoint). Optional. */
+  /** The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the  colors endpoint). Optional. */
   core.String colorId;
 
   /** Creation time of the event (as a RFC 3339 timestamp). Read-only. */
@@ -892,7 +892,7 @@ class Event {
   /** Whether this is a locked event copy where no changes can be made to the main event fields "summary", "description", "location", "start", "end" or "recurrence". The default is False. Read-Only. */
   core.bool locked;
 
-  /** The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in 'attendees' with the 'organizer' field set to True. To change the organizer, use the "move" operation. Read-only, except when importing an event. */
+  /** The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event. */
   EventOrganizer organizer;
 
   /** For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. Immutable. */
@@ -1364,7 +1364,7 @@ class EventGadget {
 
 }
 
-/** The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in 'attendees' with the 'organizer' field set to True. To change the organizer, use the "move" operation. Read-only, except when importing an event. */
+/** The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event. */
 class EventOrganizer {
 
   /** The organizer's name, if available. */
@@ -1614,7 +1614,7 @@ class EventDateTime {
   /** The date, in the format "yyyy-mm-dd", if this is an all-day event. */
   core.String date;
 
-  /** The time, as a combined date-time value (formatted according to RFC 3339). A time zone offset is required unless a time zone is explicitly specified in 'timeZone'. */
+  /** The time, as a combined date-time value (formatted according to RFC 3339). A time zone offset is required unless a time zone is explicitly specified in timeZone. */
   core.String dateTime;
 
   /** The name of the time zone in which the time is specified (e.g. "Europe/Zurich"). Optional. The default is the time zone of the calendar. */
@@ -1705,7 +1705,7 @@ class Events {
 - "owner" - The user has ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs. */
   core.String accessRole;
 
-  /** The default reminders on the calendar for the authenticated user. These reminders apply to all events on this calendar that do not explicitly override them (i.e. do not have 'reminders.useDefault' set to 'true'). */
+  /** The default reminders on the calendar for the authenticated user. These reminders apply to all events on this calendar that do not explicitly override them (i.e. do not have reminders.useDefault set to True). */
   core.List<EventReminder> defaultReminders;
 
   /** Description of the calendar. Read-only. */
@@ -1720,7 +1720,7 @@ class Events {
   /** Type of the collection ("calendar#events"). */
   core.String kind;
 
-  /** Token used to access the next page of this result. Omitted if no further results are available. */
+  /** Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided. */
   core.String nextPageToken;
 
   /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
@@ -2123,7 +2123,7 @@ class Settings {
   /** Type of the collection ("calendar#settings"). */
   core.String kind;
 
-  /** Token used to access the next page of this result. */
+  /** Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided. */
   core.String nextPageToken;
 
   /** Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided. */
